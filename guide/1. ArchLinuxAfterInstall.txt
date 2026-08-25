@@ -1,0 +1,120 @@
+##install Yay
+	1. sudo pacman -S --needed base-devel git
+	2. git clone https://aur.archlinux.org/yay.git
+	3. cd yay
+	   makepkg -si
+	4.
+.................................................
+So, this is how you install wine in arch
+
+1. sudo nano /etc/pacman.conf
+2. remove the hashtag of 
+    [multilib]
+    Include = /etc/pacman.d/mirrorlist
+3. Save and exit the editor (in Nano, press Ctrl+O, Enter, then Ctrl+X).
+4. sudo pacman -Syu
+5. sudo pacman -S wine
+6. sudo pacman -S wine-gecko wine-mono lib32-alsa-plugins lib32-gnutls lib32-mpg123
+7. winecfg
+
+next How to mount the office7 iso (keep it in desktop)
+    1. sudo mkdir -p /mnt/msoffice (create a folder)
+    2. sudo mount -o loop ~/Desktop/MSOffice7.iso /mnt/msoffice (this will mount)
+    3. cd /mnt/msoffice ls -l (navigate to setup file)
+    4. wine /mnt/msoffice/SETUP.EXE (run the installer)
+    5. cd ~ sudo umount /mnt/msoffice (unmount)
+
+## mount the shared folder and create shortcut to add to side panel
+
+.............................................
+Virtual Box Shared Folder:
+
+
+1. sudo usermod -aG vboxsf $USER
+2. sudo systemctl status vboxservice
+	if disabled, 
+	run: sudo systemctl enable --now vboxservice
+3. ls -la /media (permission denied)
+4. sudo chmod 755 /media
+5. ls -la /media (again, it should work this time)
+6. groups {
+	 if vboxsf is not in the output:
+		sudo usermod -aG vboxsf $USER
+		exec su - $USER  (or just reboot)
+	if vboxsf is in the output:
+		cd /media/sf_E
+		ls -la		(You can now access your shared folder directly)
+7. now to access my shared folder in dolphin:
+	a. In Dolphin's main location bar, navigate to /media.
+	b. Right-click on the sf_E folder.
+	c. Select Add to Places (or press Ctrl + B).
+8. done
+
+## install Pix(downloaded via flatpack) for image viewing
+	notworking, error oops
+	fix: 1. sudo pacman -S flatseal
+		 2. Open Flatseal, find Pix in the sidebar.
+		 3. Scroll down to Filesystem and ensure "All host files" or "User home" is enabled, or explicitly add the folder where your images are saved.
+
+
+## apps
+	1. sudo pacman -S gwenview (image viewer)
+	2. sudo pacman -S audacious (music player)
+	3. sudo pacman -S vlc-plugins-all (vlc codecs)
+		{about VLC:
+			go to tools>preferences>input/codecs>hardware-accelerated decoding>disable
+			}
+	4.reaper:
+		sudo pacman -S reaper
+	5. sudo pacman -S okular (pdf reader)
+	6. sudo pacman -S steam
+	7. sudo pacman -S discord
+
+Discord: 1. cp /usr/share/applications/discord.desktop ~/.local/share/applications/
+        2. nano ~/.local/share/applications/discord.desktop
+        3. add/replace:
+                Exec=/usr/bin/discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U
+        4.update-desktop-database ~/.local/share/applications/
+
+##Obs:
+	1. sudo pacman -S obs-studio qt6-wayland xdg-desktop-portal-hyprland
+	2. (launch from terminal:) QT_QPA_PLATFORM=wayland obs
+	3. mkdir -p ~/.local/share/applications
+cp /usr/share/applications/com.obsproject.Studio.desktop ~/.local/share/applications/
+	4. nano ~/.local/share/applications/com.obsproject.Studio.desktop
+	5. (modify exec=) Exec=env QT_QPA_PLATFORM=wayland obs
+	6. update-desktop-database ~/.local/share/applications
+
+##EasyEffects (alt for eq apo)
+		1. sudo pacman -S easyeffects
+		2. systemctl --user enable --now pipewire pipewire-pulse wireplumber
+		3. sudo pacman -S lsp-plugins
+
+##LocalSend:
+	1. download .tar.zst file
+	2. install
+		a. sudo pacman -S --needed base-devel git
+		b. git clone https://aur.archlinux.org/localsend-bin.git
+		c. cd localsend-bin
+		d. cat PKGBUILD
+		e. makepkg -si
+	3, sudo ufw allow 53317/tcp
+	   sudo ufw allow 53317/udp
+	   sudo ufw reload
+	4. sudo pacman -Rns localsend-bin
+
+##VirtualBox
+	   sudo pacman -Syu
+	1. sudo pacman -S virtualbox virtualbox-host-dkms linux-headers
+	2. sudo usermod -aG vboxusers $USER
+	3. sudo reboot
+	4. sudo modprobe vboxdrv
+
+##AstraMusicPlayer
+	1. download appimage from astra site
+	2. cd ~/Downloads
+	3. chmod +x Astra-0.7.0-beta-Linux.AppImage
+	4. ./Astra-0.7.0-beta-Linux.AppImage
+
+	or, yay -S astra-music-bin(install)
+	yay -R astra-music-bin (uninstall)

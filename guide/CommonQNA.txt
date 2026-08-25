@@ -1,0 +1,21 @@
+1. to see all the pacman packages installed
+    pacman -Qe
+To print,
+    pacman -Qe > installed-packages.txt
+
+2. Search for a specific app: If you want to check if a specific package is in that list, use grep:
+    pacman -Qe | grep hyprland
+
+3. I want to find the location of a folder or file:
+    find ~ -name "folder/file-name"
+
+4. To update the system:
+    sudo pacman -Syu
+
+5. to install an app
+    sudo pacman -S app-name
+
+6. to uninstall an app
+    sudo pacman -Rns package_name
+
+7.

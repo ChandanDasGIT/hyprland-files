@@ -1,0 +1,130 @@
+##installs:
+kitty: sudo pacman -S kitty
+
+network manager: sudo pacman -S networkmanager
+
+network manager applet: sudo pacman -S network-manager-applet
+
+waybar: sudo pacman -S waybar
+
+hyprlauncher: sudo pacman -S hyprlauncher
+
+hyprpaper: sudo pacman -S hyprpaper
+
+swaync(notificatin centre): sudo pacman -S swaync
+
+thunar(dolphin alt): 1. sudo pacman -S thunar
+                     2. sudo pacman -S gvfs
+image preview in thunar:
+        1. sudo pacman -S tumbler ffmpegthumbnailer
+        2. After installing:
+
+    Open Thunar.
+
+    Press Ctrl + P (or go to Edit > Preferences).
+
+    Click on the Display tab.
+
+    Look for Image Preview / Thumbnails and make sure "Show thumbnails" is set to Always or Local files only.
+
+    Adjust the maximum file size if needed, then close preferences.
+
+screenshot/select/copy: 1. sudo pacman -S grim slurp wl-clipboard
+    2. edit this in hyperland.lua:
+        //hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png']]))
+        hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim -g "$(slurp)" ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png']]))// --this will only take screenshot
+
+        //-- Fullscreen screenshot: Saves to file AND copies to clipboard
+        hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim - | tee ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S.png) | wl-copy']]))
+
+        -- Area/Slurp screenshot: Saves to file AND copies to clipboard
+        hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim -g "$(slurp)" - | tee ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S.png) | wl-copy']]))
+
+Docker: 1. sudo pacman -S nwg-dock-hyprland
+    add to autostart(hyprland.lua): hl.on("hyprland.start", function ()
+                            -- Launch the auto-hiding floating dock at the bottom
+                        hl.exec_cmd("nwg-dock-hyprland -d -p bottom")
+                      end)
+        2. sudo pacman -S nwg-drawer
+Nwg-dock conf and css:
+        1. mkdir -p ~/.config/nwg-dock-hyprland
+           touch ~/.config/nwg-dock-hyprland/style.css
+        2. nano ~/.config/nwg-dock-hyprland/style.css
+NWg-drawer conf and css:
+        1. mkdir -p ~/.config/nwg-drawer
+           touch ~/.config/nwg-drawer/drawer.css
+        2. nano ~/.config/nwg-drawer/drawer.css
+
+
+Discord: 1. cp /usr/share/applications/discord.desktop ~/.local/share/applications/
+        2. nano ~/.local/share/applications/discord.desktop
+        3. add/replace:
+                Exec=/usr/bin/discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U
+        4.update-desktop-database ~/.local/share/applications/
+
+waybar conf: nano /home/iusearchbtw/.config/waybar/config
+waybar css: nano ~/.config/waybar/style.css
+apply changes: 1. killall waybar
+               2. waybar & disown
+
+font for waybar: 1. sudo pacman -S ttf-nerd-fonts-symbols
+                 2. sudo pacman -S otf-font-awesome
+
+hyprlauncher: does't exist
+
+hyprland lua: nano ~/.config/hypr/hyprland.lua
+
+hyprpaper conf: nano ~/.config/hypr/hyprpaper.conf
+
+swaync(notificatin centre): sudo pacman -S swaync
+
+brightnessctl(for controlling brightness):
+        1. sudo pacman -S brightnessctl
+        2. in hyprland.lua
+        a. hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
+        b. hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+
+clifist (psating photoes):
+        1. sudo pacman -S cliphist
+        2. (inside lua)
+                -- Inside your autostart / exec setup in hyprland.lua
+                hl.dsp.exec_cmd("wl-paste --type text --watch cliphist store")
+                hl.dsp.exec_cmd("wl-paste --type image --watch cliphist store")
+
+##Cursor:
+A. 1. yay -S bibata-cursor-theme-bin
+   2. hyprland.lua: a.
+        hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+        hl.env("XCURSOR_SIZE", "24")
+        hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+        hl.env("HYPRCURSOR_SIZE", "24")
+                    b.
+        hl.on("hyprland.start", function ()
+                hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 24")
+        end)
+B. Fix GTK apps:
+   1. sudo pacman -S nwg-look
+   2. nwg-look
+   3. Go to the Mouse Cursor tab, select your installed theme, match the size, and click Apply.
+   (alt terminal shortcut) gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

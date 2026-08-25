@@ -1,0 +1,105 @@
+1. sudo pacman -S bluez bluez-utils
+1. sudo modprobe btusb
+2. sudo pacman -S usbutils
+3. lsmod | grep btusb
+4. sudo systemctl start bluetooth.service
+5. sudo systemctl enable bluetooth.service
+6. (GUI) a. sudo pacman -S blueman
+         b. blueman-manager
+7. (Kitty) a.
+
+
+..................................................
+Assuming you mean managing and connecting **Bluetooth (BT)** devices in Hyprland, since Hyprland is just a window manager and doesn't include a built-in Bluetooth control panel, you need to set up a Bluetooth service backend and a graphical or terminal frontend.
+
+Here is how to set up, manage, and connect Bluetooth devices in Hyprland step-by-step:
+
+---
+
+### Step 1: Enable the Bluetooth Service
+
+First, make sure the Linux Bluetooth daemon (`bluez`) is installed and running on your system.
+
+* **Install BlueZ** (if not already installed):
+* Arch Linux: `sudo pacman -S bluez bluez-utils`
+* Fedora: `sudo dnf install bluez`
+* Ubuntu/Debian: `sudo apt install bluez`
+
+
+* **Enable and start the service:**
+```bash
+sudo systemctl enable --now bluetooth
+
+```
+
+
+
+---
+
+### Step 2: Choose a Bluetooth Manager (Frontend)
+
+Because Hyprland doesn't have a default graphical interface for Bluetooth, you can choose a lightweight applet or manager that fits a Wayland environment:
+
+* **Blueman (Recommended GUI):** A full-featured GTK Bluetooth manager.
+* Install: `sudo pacman -S blueman` (Arch) or equivalent.
+* Run: `blueman-manager`
+
+
+* **Overskride:** A modern, clean GTK4 Bluetooth client.
+* **Bluetui:** A great terminal-based UI if you prefer TUI apps.
+* Install: `bluetui`
+
+
+
+---
+
+### Step 3: Add a System Tray Applet (Optional)
+
+If you want a Bluetooth icon in your status bar (like Waybar) to quickly view status or open your manager:
+
+1. Open your Waybar config (`~/.config/waybar/config`) and add the `"bluetooth"` module.
+2. Ensure you have a system tray applet running in your background autostart so the icon appears. For `blueman`, add this line to your Hyprland configuration (`~/.config/hypr/hyprland.conf`):
+```ini
+exec-once = blueman-applet
+
+```
+
+
+
+---
+
+### Step 4: Connecting via Terminal (Alternative)
+
+If you prefer using the command line via `bluetoothctl`:
+
+1. Open your terminal and launch the tool:
+```bash
+bluetoothctl
+
+```
+
+
+2. Turn power on and start scanning:
+```text
+power on
+scan on
+
+```
+
+
+3. Once you see your device's MAC address (e.g., `XX:XX:XX:XX:XX:XX`), pair and connect to it:
+```text
+pair XX:XX:XX:XX:XX:XX
+trust XX:XX:XX:XX:XX:XX
+connect XX:XX:XX:XX:XX:XX
+
+```
+
+
+
+---
+
+Are you trying to configure a Bluetooth applet in your status bar (like Waybar), or are you running into a specific connection error with a device?
+
+
+................................
