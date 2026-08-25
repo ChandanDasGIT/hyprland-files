@@ -1,0 +1,8 @@
+splash = false
+
+wallpaper {
+	monitor = LVDS-1
+	path = /home/iusearchbtw/Downloads/wallpaper.png
+	fit_mode = cover
+}
+
