@@ -1,0 +1,11 @@
+[Added Associations]
+text/plain=org.kde.kate.desktop;
+audio/mp4=org.strawberrymusicplayer.strawberry.desktop;
+application/pdf=okularApplication_pdf.desktop;
+application/xml=org.kde.kate.desktop;
+image/png=org.kde.gwenview.desktop;
+audio/flac=astra.desktop;
+
+[Default Applications]
+application/pdf=okularApplication_pdf.desktop
+image/png=org.kde.gwenview.desktop
