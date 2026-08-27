@@ -1,0 +1,42 @@
+/* Make the background behind the drawer totally transparent */
+window {
+    background-color: rgba(45, 45, 45, 45.75);
+}
+
+/* This box acts as your floating window container */
+#outer-box {
+background-color: rgba(15, 15, 15, 0.9);
+border: 1px solid rgba(255, 255, 255, 0.15);
+border-radius: 16px;
+margin: 150px 300px; /* Adjust these values to make the window smaller or bigger */
+padding: 20px;
+color: #ffffff;
+}
+
+/* Search Bar */
+entry {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+entry:focus {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+}
+
+/* App Buttons */
+button {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+button:hover, button:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}

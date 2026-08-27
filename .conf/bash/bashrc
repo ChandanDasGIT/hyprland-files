@@ -1,0 +1,66 @@
+# ─────────────────────────────────────────────
+# Monitor input
+# ─────────────────────────────────────────────
+
+switch-monitor() {
+    ddcutil setvcp 60 15
+}
+
+alias change-monitor='switch-monitor'
+alias switch-display='switch-monitor'
+alias change-display='switch-monitor'
+alias change-monitor-15='switch-monitor'
+alias change-display-15='switch-monitor'
+alias change-monitor-hdmi='switch-monitor'
+alias change-display-hdmi='switch-monitor'
+
+# ─────────────────────────────────────────────
+# Pacman
+# ─────────────────────────────────────────────
+
+alias install='sudo pacman -S'
+alias update='sudo pacman -Syu'
+alias uninstall='sudo pacman -Rns'
+
+# ─────────────────────────────────────────────
+# Config file shortcuts
+# ─────────────────────────────────────────────
+
+_config_file() {
+    case "$1" in
+        hyprland-lua) echo "$HOME/.config/hypr/hyprland.lua" ;;
+        waybar-conf)  echo "$HOME/.config/waybar/config" ;;
+        waybar-css)   echo "$HOME/.config/waybar/style.css" ;;
+        docker-css)   echo "$HOME/.config/nwg-dock-hyprland/style.css" ;;
+        drawer-css)   echo "$HOME/.config/nwg-drawer/drawer.css" ;;
+        bashrc|script) echo "$HOME/.config/bash/bashrc" ;;
+        *)             echo "$1" ;;
+    esac
+}
+
+# Open with nano
+nano() {
+    local target
+    target="$(_config_file "$1")"
+    command nano "$target"
+}
+
+# Open with Kate
+kate() {
+    local target
+    target="$(_config_file "$1")"
+    command kate "$target" &>/dev/null &
+}
+
+# ─────────────────────────────────────────────
+# Search function
+# ─────────────────────────────────────────────
+
+search() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: search <name>"
+        return 1
+    fi
+
+    find "$HOME" -iname "*$1*" 2>/dev/null
+}
