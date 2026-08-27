@@ -44,7 +44,8 @@
         "all-outputs": true,
         "warp-on-scroll": false,
 //        "on-click": "bash -c 'hyprctl dispatch workspace {name}'",
-        "format": "{name}: {icon}",
+//        "format": "{name}: {icon}",
+        "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
@@ -55,7 +56,8 @@
             "7": "",
             "8": "",
             "9": "",
-            "10": "(^_^)",
+//            "10": "(^_^)",
+            "10": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -148,7 +150,8 @@
     },
     "clock": {
         "timezone": "Asia/Kolkata",
-        "format": "{:%I:%M %p}",
+//        "format": "{:%I:%M %p}",
+        "format": "<b>{:%I:%M %p | %d-%m-%Y}</b>",
         "format-alt": "{:%Y-%m-%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "calendar": {
@@ -274,7 +277,7 @@
         "format": "󰝚  {}",
         "escape": true,
         "return-type": "json",
-        "max-length": 35,
+        "max-length": 50,
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
@@ -305,7 +308,7 @@
 //        "exec": "~/.config/waybar/cava.sh",
         "tooltip": false,
         "return-type": "plain",
-        "format": "{}",
+        "format": "{} 󰝚 ",
         "min-width": 5,
 //        "max-length": 60,
 //        "on-click": "killall cava"
