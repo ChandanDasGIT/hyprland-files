@@ -375,3 +375,19 @@ font-size: 14px;
 padding: 0 8px;
 min-width: 50px; /* Forces Waybar to allocate space for it */
 }
+
+#custom-cava {
+background: transparent;
+color: #ffffff; /* Change to your preferred accent color */
+letter-spacing: 1px;
+font-family: "JetBrainsMono Nerd Font", monospace;
+font-size: 14px;
+padding: 0 8px;
+min-width: 60px; /* Forces Waybar to allocate space for it */
+
+text-shadow:
+    -1px -1px 0 #000000,
+     1px -1px 0 #000000,
+    -1px  1px 0 #000000,
+     1px  1px 0 #000000;
+}
