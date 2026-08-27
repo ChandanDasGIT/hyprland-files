@@ -22,22 +22,22 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
---hl.monitor({
---    output   = "",
---    mode     = "preferred",
---    position = "auto",
---    scale    = "auto",
---})
+hl.monitor({
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "auto",
+})
 
-
+--[[
 hl.monitor({
     output   = "LVDS-1",
     mode     = "preferred",
     position = "auto",
     scale    = "1",
-})
+}) --]]
 
----[[
+--[[
 hl.monitor({
     output   = "HDMI-A-1",
 --    mode     = "1280x1024@75.03",
@@ -84,7 +84,7 @@ hl.exec_cmd("kitty --class kitty-cava -e cava") --]]
 --hl.exec_cmd("dolphin & sleep 1; strawberry & until hyprctl clients | grep -q 'class: org.strawberrymusicplayer.strawberry'; do sleep 0.2; done; sleep 0.5; kitty --class kitty-cava -e cava &")
 
 --hl.exec_cmd("astra & until hyprctl clients | grep -q 'class: astra'; do sleep 0.2; done; kitty --class kitty-term & until hyprctl clients | grep -q 'class: kitty-term'; do sleep 0.2; done; kitty --class kitty-cava -e cava &")
-hl.exec_cmd("astra")
+--hl.exec_cmd("astra")
 
 -- Launch background watchdog to make them unkillable
 --hl.exec_cmd("~/.config/hypr/scripts/workspace10_watchdog.sh")
@@ -106,11 +106,12 @@ hl.env("MOZ_ENABLE_WAYLAND", "1")
 --hl.env("MESA_LOADER_DRIVER_OVERRIDE", "llvmpipe")
 
 --intel hd 4000 Hardware Acceleration
+--[[
 hl.env("MESA_LOADER_DRIVER_OVERRIDE","crocus")
 hl.env("LIBVA_DRIVER_NAME","i965")
 hl.env("WLR_RENDERER","gles2")
 hl.env("AQUAMARINE_BACKEND","drm")
-
+--]]
 -----------------------
 ----- PERMISSIONS -----
 -----------------------
@@ -318,7 +319,12 @@ hl.device({
     name        = "compx-vxe-nordicmouse-1k-dongle-1",
     sensitivity = -0.8,
 })
-
+--[[ 
+hl.device({
+    name        = "epic-mouse-v1",
+    sensitivity = -0.8,
+})
+--]]
 
 ---------------------
 ---- KEYBINDINGS ----
