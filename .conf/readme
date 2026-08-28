@@ -12,6 +12,12 @@ cd yay
 makepkg -si
 
 yay -S localsend 
+        [
+        Some extra steps are needed. After installing localsend, paste these three lines in tarminal.
+        1. sudo ufw allow 53317/tcp
+	2. sudo ufw allow 53317/udp
+	3. sudo ufw reload
+        ]
 yay -S astra-music-bin
 
-updated 27th Aug, 2026
+updated 28th Aug, 2026
