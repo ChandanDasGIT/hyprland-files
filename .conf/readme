@@ -1,4 +1,5 @@
-These files shpuld be pasted into /.config folder for it to be effective.
+These files should be pasted into /.config folder (exept .bashrc) for it to be effective.
+It is reccomended to paste .bashrc file at /home/$USER ($USER = you user name)
 But before that these packages should be installed: (check packages-list file for details)
 
 Start with system up: sudo pacman -Syu
