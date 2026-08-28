@@ -23,3 +23,17 @@ To print,
     nano ~/.config/pipewire/pipewire.conf
     uncomment: default.clock.rate = 48000
     systemctl --user restart pipewire
+
+8. How to know class of running windows
+    hyprctl clients | grep -E "Window|class:"
+
+9. How to know if i am using ufw or firewalld
+    systemctl is-active ufw firewalld iptables nftables
+
+    How to Read the Output
+        ufw shows active: You are using UFW.
+        firewalld shows active: You are using Firewalld.
+        All show inactive or unknown: You do not have an active application firewall service running (or you are using raw nftables / iptables).
+
+10. How to print history of kitty
+     history > history.txt
