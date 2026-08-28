@@ -4,7 +4,7 @@ But before that these packages should be installed: (check packages-list file fo
 
 Start with system up: sudo pacman -Syu
 
-sudo pacman -S hyprlauncher zip unzip p7zip unrar xarchiver thunar-archive-plugin file-roller nano kate base-devel blueman brightnessctl cliphist discord dosfstools easyeffects fastfetch ffmpegthumbnailer git gvfs gvfs-mtp gwenview hyprpaper linux-headers networkmanager-dmenu ntfs-3g ntfsprogs nwg-dock-hyprland nwg-drawer okular otf-font-awesome ttf-jetbrains-mono-nerd pavucontrol strawberry swaync thunar ttf-nerd-fonts-symbols tumbler usbutils vlc vlc-plugins-all waybar wine woff2-font-awesome ddcutil libva-intel-driver intel-media-driver libva-utils mesa mesa-utils vulkan-intel lsp-plugins-lv2 lsp-plugins-clap gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly cava playerctl mpd ncmpcpp errands power-profiles-daemon firefoxpwa cmus mission-center --noconfirm
+sudo pacman -S hyprlauncher zip unzip p7zip unrar xarchiver thunar-archive-plugin file-roller nano kate base-devel blueman brightnessctl cliphist discord dosfstools easyeffects fastfetch ffmpegthumbnailer git gvfs gvfs-mtp gwenview hyprpaper linux-headers networkmanager-dmenu ntfs-3g ntfsprogs nwg-dock-hyprland nwg-drawer okular otf-font-awesome ttf-jetbrains-mono-nerd pavucontrol tauon-music-box nautilus swaync thunar ttf-nerd-fonts-symbols tumbler usbutils vlc vlc-plugins-all waybar wine woff2-font-awesome ddcutil libva-intel-driver intel-media-driver libva-utils mesa mesa-utils vulkan-intel lsp-plugins-lv2 lsp-plugins-clap gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly jq cava playerctl mpd ncmpcpp errands power-profiles-daemon firefoxpwa cmus mission-center --noconfirm
         [--noconfirm skips the y/n part]
 
 ##install yay (optional)
@@ -19,6 +19,6 @@ yay -S localsend
 	2. sudo ufw allow 53317/udp
 	3. sudo ufw reload
         ]
-yay -S astra-music-bin
+yay -S astra-music-bin (i found out tauon is best alternate)
 
 updated 28th Aug, 2026
