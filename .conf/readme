@@ -1,5 +1,8 @@
-These files should be pasted into /.config folder (exept .bashrc whch s inside the bash file) for it to be effective.
-It is reccomended to paste .bashrc file at /home/$USER ($USER = you user name)
+These files should be pasted into /.config folder (exept .bashrc whch is inside the bash file) for it to be effective.
+It is reccomended to paste .bashrc file at /home/$USER ($USER = you user name). If not, then u can keep the bashrc here but u will have to source this inside .bashrc. 
+
+DISCLAIMER: don't replace hyprland.lua file without changing the display and monitor settings
+
 But before that these packages should be installed: (check packages-list file for details)
 
 Start with system up: sudo pacman -Syu
