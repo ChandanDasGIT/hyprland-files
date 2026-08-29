@@ -22,22 +22,22 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
-hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = "auto",
-})
+--hl.monitor({
+--    output   = "",
+--    mode     = "preferred",
+--    position = "auto",
+--    scale    = "auto",
+--})
 
---[[
+
 hl.monitor({
     output   = "LVDS-1",
     mode     = "preferred",
     position = "auto",
     scale    = "1",
-}) --]]
+})
 
---[[
+---[[
 hl.monitor({
     output   = "HDMI-A-1",
 --    mode     = "1280x1024@75.03",
@@ -65,9 +65,8 @@ local menu        = "hyprlauncher"
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
---
+
 hl.on("hyprland.start", function ()
---   hl.exec_cmd(terminal)
 hl.exec_cmd("nm-applet")
 hl.exec_cmd("wl-paste --type text --watch cliphist store")
 hl.exec_cmd("wl-paste --type image --watch cliphist store")
@@ -75,22 +74,31 @@ hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CU
 hl.exec_cmd("easyeffects --gapplication-service")
 hl.exec_cmd("waybar & hyprpaper & swaync")
 hl.exec_cmd("nwg-dock-hyprland -r -p bottom")
--- Launch cava inside a terminal emulator
---[[
-hl.exec_cmd("errands")
-hl.exec_cmd("strawberry")
-hl.exec_cmd("kitty --class kitty-cava -e cava") --]]
-
---hl.exec_cmd("dolphin & sleep 1; strawberry & until hyprctl clients | grep -q 'class: org.strawberrymusicplayer.strawberry'; do sleep 0.2; done; sleep 0.5; kitty --class kitty-cava -e cava &")
-
---hl.exec_cmd("astra & until hyprctl clients | grep -q 'class: astra'; do sleep 0.2; done; kitty --class kitty-term & until hyprctl clients | grep -q 'class: kitty-term'; do sleep 0.2; done; kitty --class kitty-cava -e cava &")
---hl.exec_cmd("astra")
-
--- Launch background watchdog to make them unkillable
---hl.exec_cmd("~/.config/hypr/scripts/workspace10_watchdog.sh")
+hl.exec_cmd("nautilus & until hyprctl clients | grep -q 'class: org.gnome.Nautilus'; do sleep 0.2; done; tauon & until hyprctl clients | grep -q 'class: tauonmb'; do sleep 0.2; done; kitty --class kitty-cava -e cava &")
 end)
 
+-- Window rules for workspace10, set up for Music
+hl.window_rule({
+    match = {
+        class = "org.gnome.Nautilus",
+    },
+    workspace = "10 silent",
+})
 
+hl.window_rule({
+    match = {
+        class = "tauonmb",
+    },
+    workspace = "10 silent",
+})
+
+hl.window_rule({
+    match = {
+        class = "^(kitty-cava)$",
+    },
+    workspace = "10 silent",
+})
+--More window_rule at the bottom
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -105,8 +113,8 @@ hl.env("MOZ_ENABLE_WAYLAND", "1")
 --hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 --hl.env("MESA_LOADER_DRIVER_OVERRIDE", "llvmpipe")
 
+---[[
 --intel hd 4000 Hardware Acceleration
---[[
 hl.env("MESA_LOADER_DRIVER_OVERRIDE","crocus")
 hl.env("LIBVA_DRIVER_NAME","i965")
 hl.env("WLR_RENDERER","gles2")
@@ -159,7 +167,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 5,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
@@ -186,6 +194,103 @@ hl.config({
     },
 })
 
+----------------------
+----Layout Configs----
+----------------------
+-- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+hl.config({
+    dwindle = {
+        preserve_split = true, -- You probably want this
+        force_split = 2,
+        use_active_for_splits = false,
+        smart_split = false,
+        smart_resizing = true,
+        permanent_direction_override = true,
+        split_bias = 0,
+        default_split_ratio = 1.6
+    },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
+hl.config({
+    master = {
+        mfact = 0.5,
+        orientation = "left",
+    },
+})
+
+--This is a custom layout for 10th workspace which is designed to be a dedicated wokspace for music.
+hl.layout.register("threeway", {
+    recalculate = function(ctx)
+    local n = #ctx.targets
+
+    if n == 0 then
+        return
+        end
+
+        if n == 1 then
+            ctx.targets[1]:place(ctx.area)
+            return
+            end
+
+            if n == 2 then
+                ctx.targets[1]:place(
+                    ctx:split(ctx.area, "left", 0.70)
+                )
+
+                ctx.targets[2]:place(
+                    ctx:split(ctx.area, "right", 0.30)
+                )
+
+                return
+                end
+
+                local left = ctx:split(ctx.area, "left", 0.70)
+                local right = ctx:split(ctx.area, "right", 0.30)
+
+                ctx.targets[1]:place(left)
+
+                local top = ctx:split(right, "top", 0.80)
+                local bottom = ctx:split(right, "bottom", 0.20)
+
+                ctx.targets[2]:place(top)
+                ctx.targets[3]:place(bottom)
+                end,
+})
+
+-----------------------
+----Workspace rules----
+-----------------------
+
+-- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+-- "Smart gaps" / "No gaps when only"
+-- uncomment all if you wish to use that.
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
+-- hl.window_rule({
+--     name  = "no-gaps-wtv1",
+--     match = { float = false, workspace = "w[tv1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+-- hl.window_rule({
+--     name  = "no-gaps-f1",
+--     match = { float = false, workspace = "f[1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+
+hl.workspace_rule({ workspace = "1", persistent = true })
+hl.workspace_rule({ workspace = "2", persistent = true })
+hl.workspace_rule({ workspace = "3", persistent = true })
+hl.workspace_rule({ workspace = "4", persistent = true })
+hl.workspace_rule({ workspace = "5", persistent = true })
+hl.workspace_rule({ workspace = "6", persistent = true })
+hl.workspace_rule({ workspace = "7", persistent = true })
+hl.workspace_rule({ workspace = "8", persistent = true })
+hl.workspace_rule({ workspace = "9", persistent = true })
+hl.workspace_rule({ workspace = "10", layout = "lua:threeway", persistent = true })
+
 --Cursor fix
 hl.config({
     cursor = {
@@ -193,6 +298,9 @@ hl.config({
     },
 })
 
+------------------
+----Animations----
+------------------
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
@@ -222,49 +330,6 @@ hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
-
-
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
-hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-        force_split = 2,
-        use_active_for_splits = false,
-        smart_split = false,
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
-hl.config({
-    master = {
---        new_status = "master",
-        new_status = "slave",
-        mfact = 0.5,
-        orientation = "left",
---        slave_count_for_center_master = 2,
---        center_master_fallback = left
---        inherit_fullscreen = true,
---        always_center_master = false,
-    },
-})
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 hl.config({
@@ -319,18 +384,18 @@ hl.device({
     name        = "compx-vxe-nordicmouse-1k-dongle-1",
     sensitivity = -0.8,
 })
---[[ 
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.8,
-})
---]]
+
 
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local altMod = "ALT"
+
+hl.bind(altMod .. " + TAB", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + TAB", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(altMod .. " + F4", hl.dsp.exec_cmd("systemctl poweroff"))
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
@@ -345,10 +410,12 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("nwg-drawer"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kate"))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 --hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland -p bottom"))
 --hl.bind(mainMod .. " + ALT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland -p bottom"))
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland"))
-hl.bind(mainMod .. " + F4", hl.dsp.exec_cmd("systemctl poweroff"))
+
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -424,13 +491,9 @@ for i = 1, 10 do
         no_focus = true,
     })
 
-    -- Layer rules also return a handle.
-    -- local overlayLayerRule = hl.layer_rule({
-    --     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)
+-----------------
+----ADDITIONS----
+-----------------
 
 -- Hyprland-run windowrule
 hl.window_rule({
@@ -444,106 +507,25 @@ hl.window_rule({
 hl.window_rule({
     match = { class = "org.pulseaudio.pavucontrol" },
     float = true,
-    size = { 450, 400 },
-    -- Moves it near the top-right (adjust X coordinate to align with your>
+    size = { 600,500 },
     move = { "100%-470", "45" },
     -- Forces a slide-down animation from the top edge
     animation = "slide top",
 })
 
-hl.workspace_rule({ workspace = "1", persistent = true })
-hl.workspace_rule({ workspace = "2", persistent = true })
-hl.workspace_rule({ workspace = "3", persistent = true })
-hl.workspace_rule({ workspace = "4", persistent = true })
-hl.workspace_rule({ workspace = "5", persistent = true })
-hl.workspace_rule({ workspace = "6", persistent = true })
-hl.workspace_rule({ workspace = "7", persistent = true })
-hl.workspace_rule({ workspace = "8", persistent = true })
-hl.workspace_rule({ workspace = "9", persistent = true })
-hl.workspace_rule({ workspace = "10", persistent = true })
+hl.window_rule({
+    match = { class = "org.kde.gwenview" },
+    float = true,
+    size = { 1000, 600 },
+    move = { "100%-670", "45" },
+    animation = "slide top",
+})
+hl.window_rule({
+    match = { class = "org.gnome.gThumb" },
+    float = true,
+    size = { 1000, 600 },
+    move = { "100%-670", "45" },
+    animation = "slide top",
+})
 
------------------
-----ADDITIONS----
------------------
 
---[[
-hl.window_rule({
-    match = {
-        class = "^(io.github.mrvladus.List)$",
-    },
-    workspace = "10 silent",
-}) --]]
---[[
-hl.window_rule({
-    match = {
-        class = "org.kde.dolphin",
-    },
-    workspace = "10 silent",
-})
-hl.window_rule({
-    match = {
-        class = "^(org.strawberrymusicplayer.strawberry)$",
-    },
-    workspace = "10 silent",
-})
-hl.window_rule({
-    match = {
-        class = "^(kitty-cava)$",
---        title = "^(cava)$",
-    },
-    workspace = "10 silent",
-})
---]]
---workspace10
-hl.window_rule({
-    match = {
-        class = "^(astra)",
-    },
-    workspace = "10 silent",
-})
---[[
-hl.window_rule({
-    match = {
-        class = "^(kitty-term)$",
-    },
-    workspace = "9 silent",
-})
-hl.window_rule({
-    match = {
-        class = "^(kitty-cava)$",
-               --        title = "^(cava)$",
-    },
-    workspace = "9 silent",
-})
---]]
-
---[[
--- 3. Prevent dragging or moving these specific windows off Workspace 10
-hl.window_rule({
-    match = {
-        class = "kitty|io.github.mrvladus.List|org.strawberrymusicplayer.strawberry",
-    },
---        no_move = true,
-})
---]]
-
---[[
--- 4. Prevent maximizing or changing window state on Workspace 10
-hl.window_rule({
-    match = {
-        workspace = "10",
-    },
-        suppress_event = "maximize",
-})
---]]
-hl.window_rule({
-    match = {
-        workspace = "9",
-    },
-    suppress_event = "maximize",
-})
--- Gives Astra (Master) 60% width and the right stack 40% width on workspace 9
-hl.workspace_rule({
-    workspace = "9",
-    layout_opts = { mfact = 0.60 }
-})

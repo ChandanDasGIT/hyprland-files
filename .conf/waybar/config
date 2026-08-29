@@ -11,17 +11,15 @@
         "sway/mode",
         "sway/scratchpad",
         "custom/media",
-        "cava"
+        "custom/cava"
     ],
     "modules-center": [
         "sway/window",
-//        "custom/cava",
         "clock"
-
     ],
     "modules-right": [
         "mpd",
-        "custom/cava",
+//        "custom/cava",
         "idle_inhibitor",
         "pulseaudio",
         //        "network",
@@ -210,18 +208,6 @@
             "power-saver": ""
         }
     },
-    //    "network": {
-    //      // "interface": "wlp2*", // (Optional) To force the use of this interface
-    //        "format-wifi": "{essid} ({signalStrength}%) ",
-    //        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-    //        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    //        "format-linked": "{ifname} (No IP) 󰊗",
-    //        "format-disconnected": "Disconnected ⚠",
-    //        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    //	"format-wifi": "  {essid}",
-    //        "format-disconnected": "Disconnected",
-    //        "on-click": "networkmanager_dmenu"
-    //    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon}   {format_source}",
@@ -241,26 +227,6 @@
         },
         "on-click": "pavucontrol"
     },
-/*    "custom/media": {
-//        "format": "{icon} {text}",
-//        "return-type": "json",
-//        "max-length": 40,
-//        "format-icons": {
-//            "spotify": "",
-//            "default": "🎜"
-        "format": "󰝚  {}",
-        "escape": true,
-        "return-type": "json",
-        "max-length": 35,
-        "on-click": "playerctl play-pause",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous",
-        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{player}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }, */
     "custom/power": {
         "format" : "⏻ ",
         "tooltip": false,
@@ -282,33 +248,14 @@
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
         "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{player}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F"
-//        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
     },
-
-    // Sound Wave Animation Module
- /*   "cava": {
-        "framerate": 30,
-        "bars": 10,
-        "lower_cutoff_freq": 50,
-        "higher_cutoff_freq": 10000,
-        "method": "pipewire",
-        "source": "auto",
-        "stereo": false,
-        "hide_on_silence": true,
-        "format": "{output}",
-        "bar_delimiter": 0,
-        "format-icons": [" ", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
-        "actions": {
-            "on-click-right": "mode"
-        }
-    }, */
     "custom/cava": {
         "exec": "cava -p ~/.config/cava/config_waybar | sed -u 's/;//g;s/0/ /g;s/1/▂/g;s/2/▃/g;s/3/▄/g;s/4/▅/g;s/5/▆/g;s/6/▇/g;s/7/█/g'",
 //        "exec": "cava -p ~/.config/cava/config_waybar",
 //        "exec": "~/.config/waybar/cava.sh",
         "tooltip": false,
         "return-type": "plain",
-        "format": "{} 󰝚 ",
+        "format": "{} ",
         "min-width": 5,
 //        "max-length": 60,
 //        "on-click": "killall cava"

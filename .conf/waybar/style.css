@@ -50,7 +50,7 @@ button:hover {
 
 /* you can set a style on hover for any module like this */
 #pulseaudio:hover {
-background-color: #a37800;
+background-color: #404040;
 }
 
 #workspaces button {
@@ -240,7 +240,7 @@ background-color: transparent;
 }
 
 #temperature.critical {
-background-color: #eb4d4b;
+background-color: #800020;
 }
 
 #tray {
