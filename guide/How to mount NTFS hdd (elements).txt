@@ -3,3 +3,8 @@ How to mount NTFS hdd (elements)
 1. sudo mkdir -p /mnt/elements
 2. sudo mount -t ntfs-3g /dev/sdb1 /mnt/elements
 3. sudo umount /mnt/elements
+
+(apparently not needed for Nocturnal)
+1. sudo mkdir -p /mnt/Nocturnal
+2. sudo mount -t ntfs-3g /dev/sdb1 /mnt/Nocturnal
+3. sudo umount /mnt/Nocturnal

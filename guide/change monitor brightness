@@ -1,0 +1,42 @@
+sudo pacman -S ddcutil
+sudo modprobe i2c-dev
+echo "i2c-dev" | sudo tee /etc/modules-load.d/i2c-dev.conf
+ddcutil detect
+# Set brightness to 50%
+ddcutil setvcp 10 50
+hyprland conf (translate to lua):
+        # Increase brightness by 10%
+bindel = , XF86MonBrightnessUp, exec, ddcutil setvcp 10 + 10
+
+# Decrease brightness by 10%
+bindel = , XF86MonBrightnessDown, exec, ddcutil setvcp 10 - 10
+
+////////////////////////////////////
+1. sudo modprobe i2c-dev
+2. To make this permanent, add it to /etc/modules-load.d/i2c.conf:
+    i2c-dev
+3. sudo pacman -S ddcutil
+4. ddcutil detect
+5. check current brightness
+    ddcutil getvcp 10
+6. set brightness:
+    ddcutil setvcp 10 50
+
+Method 2: brightnessctl (Unified Control for Internal & External)
+
+If you want a lightweight tool that can control both your laptop screen and external monitors seamlessly using backlight/DDC/CI protocols:
+
+    Install brightnessctl:
+    Bash
+
+    sudo pacman -S brightnessctl
+
+    List available devices:
+    Bash
+
+    brightnessctl --list
+
+    Control brightness:
+    Bash
+
+    brightnessctl --device="ddc:0" set 50%

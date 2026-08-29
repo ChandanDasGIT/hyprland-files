@@ -59,22 +59,33 @@ Virtual Box Shared Folder:
 
 ## apps
 	1. sudo pacman -S gwenview (image viewer)
+		[
+			sudo pacman -S qt6ct
+			export QT_QPA_PLATFORMTHEME=qt6ct
+			qt6ct (choose theme for gwenview)
+		]
 	2. sudo pacman -S audacious (music player)
 	3. sudo pacman -S vlc-plugins-all (vlc codecs)
 		{about VLC:
 			go to tools>preferences>input/codecs>hardware-accelerated decoding>disable
 			}
-	4.reaper:
-		sudo pacman -S reaper
+	4. reaper: sudo pacman -S reaper
 	5. sudo pacman -S okular (pdf reader)
 	6. sudo pacman -S steam
 	7. sudo pacman -S discord
+	8. sudo pacman -S nautilus
+		{paste this in tarminal for dark theme:
+		gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+		}
+	9. sudo pacman -S tauon-music-box (best music player)
 
-Discord: 1. cp /usr/share/applications/discord.desktop ~/.local/share/applications/
-        2. nano ~/.local/share/applications/discord.desktop
-        3. add/replace:
+Discord: 1.mkdir -p ~/.local/share/applications
+		2. cp /usr/share/applications/discord.desktop ~/.local/share/applications/
+        3. nano ~/.local/share/applications/discord.desktop
+        4. add/replace:
                 Exec=/usr/bin/discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U
-        4.update-desktop-database ~/.local/share/applications/
+				or, Exec=discord --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+        5. update-desktop-database ~/.local/share/applications/
 
 ##Obs:
 	1. sudo pacman -S obs-studio qt6-wayland xdg-desktop-portal-hyprland

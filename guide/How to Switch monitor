@@ -1,0 +1,23 @@
+How to Switch monitor
+
+1. sudo pacman- S ddcutil
+2. sudo modprobe i2c-dev
+3. ddcutil detect (not neccesary)
+4. ddcutil setvcp 60 17  # 17(0x11) = HDMI
+   ddcutil setvcp 60 15  # 15(0x0f) = DisplayPort
+   ddcutil setvcp 60 1  # 1(0x01) = D-Sub/VGA
+
+
+creating shortcut commands: [bashrc = bash (Bourne Again SHell) + rc (Run Commands or Run Control)]
+
+1. mkdir -p ~/.config/bash
+2. nano ~/.config/bash/bashrc
+3. inside bashrc:
+      alias change-display="ddcutil setvcp 60 15"
+      alias change-monitor="ddcutil setvcp 60 15"
+      alias change-display-15="ddcutil setvcp 60 15"
+      alias change-monitor-15="ddcutil setvcp 60 15"
+      alias change-display-hdmi="ddcutil setvcp 60 15"
+      alias change-monitor-hdmi="ddcutil setvcp 60 15"
+4. echo "source ~/.config/bash/bashrc" >> ~/.bashrc
+5. source ~/.bashrc

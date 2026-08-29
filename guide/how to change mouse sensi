@@ -1,0 +1,10 @@
+how to change mouse sensi
+
+1. check mouse name
+    hyprctl devices
+
+2. add this to hyprland.lua
+    hl.device({
+        name        = "compx-vxe-nordicmouse-1k-dongle-1",
+        sensitivity = -0.8,
+    })

@@ -1,0 +1,6 @@
+how to WebApp
+
+1. download firefox extention: Progressive Web Apps for Firefox by
+2. follow instructions
+3. sudo pacman -S firefoxpwa
+4. done

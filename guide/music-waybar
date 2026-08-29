@@ -1,0 +1,4 @@
+music-waybar
+
+sudo pacman -S waybar cava playerctl
+kate ~/.config/waybar/config.jsonc

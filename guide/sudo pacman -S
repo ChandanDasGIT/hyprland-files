@@ -1,0 +1,3 @@
+Start with system up: sudo pacman -Syu
+
+sudo pacman -S hyprlauncher zip unzip p7zip nano kate base-devel blueman brightnessctl cliphist discord dosfstools easyeffects fastfetch ffmpegthumbnailer git gvfs gvfs-mtp gwenview hyprpaper linux-headers networkmanager-dmenu ntfs-3g ntfsprogs nwg-dock-hyprland nwg-drawer okular otf-font-awesome ttf-jetbrains-mono-nerd pavucontrol strawberry swaync thunar ttf-nerd-fonts-symbols tumbler usbutils vlc vlc-plugins-all waybar wine woff2-font-awesome ddcutil libva-intel-driver intel-media-driver libva-utils mesa mesa-utils vulkan-intel lsp-plugins-lv2 lsp-plugins-clap gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly cava playerctl mpd ncmpcpp errands power-profiles-daemon firefoxpwa cmus mission-center

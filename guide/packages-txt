@@ -1,0 +1,136 @@
+Hyprland / desktop
+
+    hyprlauncher — App launcher/search tool for Hyprland. Think of it like a lightweight application menu: press a key, type an app name, launch it.
+    hyprpaper — Wallpaper manager for Hyprland/Wayland. Lets you set different wallpapers for your monitors.
+    waybar — Customizable status bar for Wayland. Shows things like workspaces, clock, CPU/RAM, volume, network, battery, etc.
+    nwg-dock-hyprland — A macOS-like application dock for Hyprland.
+    nwg-drawer — Application drawer/menu for Wayland. Similar concept to an app grid.
+    swaync — Notification center/daemon for Wayland. Handles desktop notifications and gives you a notification panel.
+    brightnessctl — Command-line utility for changing screen/backlight brightness.
+    cliphist — Clipboard history manager. Lets you retrieve things you've copied previously.
+    playerctl — Command-line/media-control utility. Lets Waybar or keybindings control Spotify, VLC, MPV, etc.
+    power-profiles-daemon — Manages power profiles such as balanced, performance, and power-saver.
+
+File managers & file handling
+
+    thunar — Lightweight graphical file manager. Similar to Windows File Explorer.
+    gvfs — Adds virtual filesystem support to Linux desktop applications. Makes things like network locations, trash, removable drives, etc. work nicely.
+    gvfs-mtp — Adds MTP support to GVFS, useful for accessing Android phones through your file manager.
+    gwenview — KDE image/photo viewer.
+    okular — KDE document/PDF viewer.
+    tumbler — Generates thumbnails for files in file managers such as Thunar.
+    ffmpegthumbnailer — Generates video thumbnails using FFmpeg.
+    usbutils — Provides commands such as lsusb for identifying USB devices. For example: "lsusb" will show connected USB devices.
+
+Disk / filesystem packages
+
+    dosfstools — Tools for FAT filesystems. Useful for FAT16/FAT32 partitions and USB drives.
+    ntfs-3g — Lets Linux read/write NTFS filesystems, commonly used by Windows.
+    ntfsprogs — NTFS filesystem utilities.
+    zip — Creates .zip archives.
+    unzip — Extracts .zip archives.
+    p7zip — 7-Zip archive support and tools. (used inside dolphin or thunar)
+
+Editors / development
+
+    nano — Simple terminal text editor. Very beginner-friendly.
+    kate — Powerful graphical text/code editor from KDE.
+    git — Version-control system used by virtually every major software-development ecosystem.
+    base-devel — A collection of essential development/build tools. If you're going to use the AUR, base-devel is particularly important. used for compiling software and building Arch/AUR packages. It includes things such as gcc, make, fakeroot, etc.
+    linux-headers — Linux kernel headers. Useful/required for compiling certain kernel modules and some software.
+
+Networking / Bluetooth
+
+    blueman — Graphical Bluetooth manager. Lets you pair headphones, keyboards, phones, controllers, etc.
+    networkmanager-dmenu — A dmenu-style interface for controlling NetworkManager connections. Useful for a keyboard-driven Hyprland setup.
+
+    You'd typically use it to quickly select Wi-Fi networks without opening a large settings application.
+
+Audio
+
+    pavucontrol — Graphical PulseAudio/PipeWire volume mixer. Extremely useful for choosing which application uses which audio device.
+    easyeffects — Audio effects processor. Can provide EQ, compressor, limiter, microphone processing, noise reduction, etc.
+    lsp-plugins-lv2 — Large collection of audio effects/instruments using the LV2 plugin format.
+    lsp-plugins-clap — LSP audio plugins using the CLAP plugin format.
+    cava — Terminal audio visualizer. Gives you those bouncing spectrum bars.
+    mpd — Music Player Daemon. A background music server that can be controlled by different clients.
+    ncmpcpp — Terminal interface/client for MPD.
+    cmus — Lightweight terminal music player.
+    strawberry — Full graphical music player/library manager.
+
+    MPD vs cmus vs Strawberry
+
+    You don't necessarily need all three:
+
+    mpd + ncmpcpp → powerful keyboard/terminal music setup.
+    cmus → standalone terminal music player.
+    strawberry → full GUI music library/player.
+
+    If you're building a minimalist Hyprland setup, MPD + ncmpcpp is particularly nice.
+
+Video / multimedia
+
+    vlc — VLC media player.
+    vlc-plugins-all — Additional VLC codecs/plugins and functionality.
+    gst-libav — GStreamer plugin using FFmpeg/Libav codecs.
+    gst-plugins-good — GStreamer plugins considered high-quality/well-maintained.
+    gst-plugins-bad — Additional GStreamer plugins with varying maturity/support.
+    gst-plugins-ugly — GStreamer plugins with licensing/patent/history complications but useful codecs/features.
+
+    These are largely there to make different Linux applications capable of playing/processing more media formats.
+
+Graphics / Intel GPU
+
+This section is particularly relevant if you're using an Intel GPU.
+
+    mesa — Major open-source implementation of OpenGL and related graphics APIs on Linux.
+    mesa-utils — Utilities for testing/querying your graphics stack.
+    vulkan-intel — Intel's open-source Vulkan driver.
+    intel-media-driver — Intel hardware video acceleration driver for newer Intel GPUs.
+    libva-intel-driver — Older Intel VA-API video acceleration driver.
+    libva-utils — Utilities for testing VA-API video acceleration.
+    ddcutil — Communicates with monitors using DDC/CI. Can allow software to change things like monitor brightness, input, etc.
+
+    About these two:
+    You probably don't need both:
+
+    libva-intel-driver
+    intel-media-driver
+
+    intel-media-driver is intended for newer Intel GPUs, while libva-intel-driver is the older/legacy Intel VA-API driver.
+
+Fonts
+
+    otf-font-awesome — Font Awesome icon font. Useful for icons in Waybar and other desktop configuration.
+    ttf-jetbrains-mono-nerd — JetBrains Mono with Nerd Font glyphs. Excellent terminal/programming font with extra icons.
+    ttf-nerd-fonts-symbols — Nerd Font symbols used by terminal prompts, Waybar, launchers, etc.
+    woff2-font-awesome — Font Awesome fonts in WOFF2 web-font format.
+
+Discord
+    discord — Discord desktop client.
+
+Windows compatibility
+
+    wine — Compatibility layer for running many Windows applications/games on Linux.
+    bottles - better for gaming
+
+System monitoring / information
+
+    fastfetch — Displays system information in the terminal: OS, kernel, CPU, GPU, RAM, desktop environment, etc.
+    mission-center — GUI system monitor. Similar in concept to Windows Task Manager.
+
+firefoxpwa
+
+    firefoxpwa — Allows Progressive Web Apps (PWAs) to be managed/run with Firefox.
+
+power-profiles-daemon
+    This one is useful on laptops.
+
+errands
+
+    errands — A graphical task/to-do list application. It's basically a lightweight desktop todo manager.
+
+ddcutil
+    This one is a little different from the other packages.
+    ddcutil lets Linux communicate with compatible external monitors over DDC/CI.
+

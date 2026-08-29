@@ -1,0 +1,5 @@
+cava config/css
+
+mkdir -p ~/.config/cava
+cp /usr/share/cava/config ~/.config/cava/config
+

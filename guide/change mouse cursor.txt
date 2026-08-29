@@ -1,0 +1,42 @@
+That happens because when Hyprland first starts up, the cursor theme and size have not been applied to the Wayland compositor yet.
+
+During those first few moments of boot, you are seeing the default, unscaled fallback cursor (often the tiny default XCursor or adwaita cursor) before Hyprland or your environment manager applies your custom theme settings.
+
+Here are the main causes and how to fix it directly in your configuration:
+1. Set the Cursor Size & Theme in Hyprland Environment Variables
+
+Hyprland needs to know the cursor size as early as possible so it doesn't default to a tiny unscaled size (especially on high-DPI screens).
+
+Add environment variables for your cursor theme and size at the top of your Lua configuration (or shell config):
+Lua
+
+-- Replace "Adwaita" and "24" with your preferred theme name and size
+hl.env("XCURSOR_THEME", "Adwaita")
+hl.env("XCURSOR_SIZE", "24")
+
+hl.env("HYPRCURSOR_THEME", "Adwaita")
+hl.env("HYPRCURSOR_SIZE", "24")
+
+2. Set the Cursor Size in Hyprland's Config Settings
+
+If your Lua wrapper exposes Hyprland's exec_cmd or set_cursor command, explicitly set the cursor size inside your startup hook:
+Lua
+
+hl.on("hyprland.start", function ()
+    -- Apply cursor theme and size immediately at boot
+    hl.exec_cmd("hyprctl setcursor Adwaita 24")
+
+    -- ... rest of your autostart apps
+end)
+
+3. Missing GTK / XDG Desktop Settings Sync
+
+If GTK apps or background processes load before GTK defaults are set, they spawn with the system default 16px cursor.
+
+Adding GTK settings to your autostart ensures GTK uses your preferred size immediately:
+Bash
+
+gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+gsettings set org.gnome.desktop.interface cursor-size 24
+
+You can add those two gsettings lines into your hl.on("hyprland.start", ...) list right before launching apps like Errands and Strawberry!

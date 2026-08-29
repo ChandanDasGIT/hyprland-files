@@ -1,0 +1,19 @@
+Shortcuts
+
+    ~/.config/hypr/hyprland.lua = hyprland-lua
+    ~/.config/waybar/config = waybar-conf
+    ~/.config/waybar/style.css = waybar-css
+    ~/.config/nwg-dock-hyprland/style.css = docker-css
+    ~/.config/nwg-drawer/drawer.css = drawer-css
+    ~/.config/bash/bashrc = bashrc/script
+    sudo pacman -S = install
+    sudo pacman -Syu = update
+    sudo pacman -Rns = uninstall
+    find ~ -name "folder/file-name" = search "file-name" ("" are optional)
+
+     alias change-display="ddcutil setvcp 60 15"        | All of these
+     alias change-monitor="ddcutil setvcp 60 15"        | will mean
+     alias change-display-15="ddcutil setvcp 60 15"     | change the
+     alias change-monitor-15="ddcutil setvcp 60 15"     | display to
+     alias change-display-hdmi="ddcutil setvcp 60 15"   | HDMI output
+     alias change-monitor-hdmi="ddcutil setvcp 60 15"   | :)

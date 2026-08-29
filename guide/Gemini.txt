@@ -1,0 +1,6 @@
+Settng up Gemini CLI
+
+1. sudo pacman -S nodejs npm
+2. npx @google/gemini-cli
+3. gemini
+

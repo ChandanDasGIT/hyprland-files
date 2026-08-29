@@ -61,8 +61,20 @@ Discord: 1. cp /usr/share/applications/discord.desktop ~/.local/share/applicatio
         3. add/replace:
                 Exec=/usr/bin/discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U
         4.update-desktop-database ~/.local/share/applications/
+##waybar:
+
+        1. # 1. Create the configuration directory
+        mkdir -p ~/.config/waybar
+
+        # 2. Copy the default config template
+        cp /etc/xdg/waybar/config.jsonc ~/.config/waybar/config
+
+        # 3. Copy the default CSS template
+        cp /etc/xdg/waybar/style.css ~/.config/waybar/style.css
+
 
 waybar conf: nano /home/iusearchbtw/.config/waybar/config
+                or, nano ~/.config/waybar/config
 waybar css: nano ~/.config/waybar/style.css
 apply changes: 1. killall waybar
                2. waybar & disown
@@ -74,7 +86,17 @@ hyprlauncher: does't exist
 
 hyprland lua: nano ~/.config/hypr/hyprland.lua
 
-hyprpaper conf: nano ~/.config/hypr/hyprpaper.conf
+hyprpaper conf:
+        1. nano ~/.config/hypr/hyprpaper.conf
+        2. splash = false
+
+        wallpaper {
+        monitor = LVDS-1
+        path = /home/iusearchbtw/Downloads/wallpaper.png
+        fit_mode = cover
+        }
+
+        3.. systemctl --user enable --now hyprpaper.service
 
 swaync(notificatin centre): sudo pacman -S swaync
 
@@ -107,6 +129,13 @@ B. Fix GTK apps:
    2. nwg-look
    3. Go to the Mouse Cursor tab, select your installed theme, match the size, and click Apply.
    (alt terminal shortcut) gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'
+
+##################################
+strawberry
+
+1. sudo pacman -S gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
+2. rm -f ~/.cache/gstreamer-1.0/registry.*.bin
+
 
 
 

@@ -1,0 +1,11 @@
+external monitor
+
+1. sudo nano /etc/mkinitcpio.conf
+2. Find the line that starts with MODULES=. Add i915 inside the parentheses so it looks like this:
+
+MODULES=(i915)
+
+Save and close the file (Ctrl + O, Enter, then Ctrl + X).
+
+3. sudo mkinitcpio -P
+4. sudo reboot
