@@ -1,0 +1,40 @@
+
+1. update github and the readme page for yay -S waybar-git
+3. firefox move to ram
+
+fix vol up down - change default from easyeffects to pipewire..make tauon follow easyeffects output
+
+virtual keyboard on waybar on-click
+
+to-do
+
+1. update github and the readme page for yay -S waybar-git
+3. firefox move to ram
+
+fix vol up down - change default from easyeffects to pipewire..make tauon follow easyeffects output
+
+virtual keyboard on waybar on-click
+
+need softwrap on pin
+
+------------
+----DONE----
+------------
+
+1. 1. create tarminal shortcuts  --done
+    {
+    ~/.config/hypr/hyprland.lua = hyprland-lua //
+    ~/.config/waybar/config = waybar-conf //
+    ~/.config/waybar/style.css = waybar-css //
+    ~/.config/nwg-dock-hyprland/style.css = docker-css //
+    ~/.config/nwg-drawer/drawer.css = drawer-css //
+    ~/.config/bash/bashrc = bashrc //
+    // these work with nano and kate
+
+    sudo pacman -S = install //
+    sudo pacman -Syu = update //
+    sudo pacman -Rns = uninstall //
+    find ~ -name "folder/file-name" = search "file-name" //
+    }
+
+

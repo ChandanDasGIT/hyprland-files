@@ -1,6 +1,6 @@
 /* Make the background behind the drawer totally transparent */
 window {
-    background-color: rgba(45, 45, 45, 45.75);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 /* This box acts as your floating window container */

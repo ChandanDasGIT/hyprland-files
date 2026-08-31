@@ -148,7 +148,7 @@ animation-direction: alternate;
 }
 
 #power-profiles-daemon {
-padding-right: 15px;
+padding-right: 10px;
 }
 
 #power-profiles-daemon.performance {
@@ -381,7 +381,7 @@ background: transparent;
 color: #ffffff; /* Change to your preferred accent color */
 letter-spacing: 1px;
 font-family: "JetBrainsMono Nerd Font", monospace;
-font-size: 14px;
+font-size: 5px;
 padding: 0 8px;
 min-width: 60px; /* Forces Waybar to allocate space for it */
 
@@ -390,4 +390,106 @@ text-shadow:
      1px -1px 0 #000000,
     -1px  1px 0 #000000,
      1px  1px 0 #000000;
+}
+
+#custom-tauon-prev,
+#custom-tauon-play,
+#custom-tauon-next {
+font-family: "JetBrainsMono Nerd Font", monospace;
+padding: 0 5px;
+margin: 4 4px;
+font-size: 15px;
+color: #ffffff;
+background: transparent;
+}
+
+#custom-tauon-prev:hover,
+#custom-tauon-play:hover,
+#custom-tauon-next:hover {
+color: #89b4fa; /* Accent color on hover */
+}
+
+#custom-hardware-toggle {
+padding: 0 8px;
+color: #00bfff; /* Matches your neon blue theme */
+font-size: 14px;
+}
+
+#custom-hardware-toggle:hover {
+color: #ffffff;
+}
+
+/* Optional container styling when expanded */
+#group-hardware-drawer {
+background-color: rgba(20, 20, 20, 0.6);
+border-radius: 6px;
+margin: 2px 0;
+}
+/* Drawer container styling */
+#group-workspace-drawer {
+background: transparent;
+padding: 0 4px;
+margin: 0;
+}
+
+/* Custom trigger button (1 ❯) */
+#custom-active-workspace {
+color: #ffffff;
+font-weight: bold;
+font-family: "Noto Sans Mono", sans-serif;
+padding: 0 0px 0 8px;
+margin: 0;
+background: transparent;
+}
+
+#custom-active-workspace:hover {
+color: #ffffff;
+}
+
+/* Remove default GTK button styles & gray boxes */
+#workspaces button {
+padding: 0 4px;
+background-color: transparent;
+color: #ffffff;
+box-shadow: none;
+text-shadow: none;
+border: none;
+border-radius: 0;
+border-bottom: 2px solid transparent;
+}
+
+/* Active workspace icon style */
+#workspaces button.active {
+color: #ffffff;
+background-color: transparent;
+
+}
+
+/* Hover effect on workspace icons */
+#workspaces button:hover {
+color: #ffffff;
+background-color: transparent;
+}
+
+#custom-wallpaper {
+padding: 0 10px;
+background-color: transparent;
+color: #ffffff;
+border-radius: 8px;
+margin: 4px 2px;
+}
+
+#custom-wallpaper:hover {
+background-color: #313244;
+}
+
+#custom-todo {
+font-size: 16px;
+padding: 0 10px;
+color: #ffffff;
+}
+
+#custom-todo:hover {
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 5px;
 }

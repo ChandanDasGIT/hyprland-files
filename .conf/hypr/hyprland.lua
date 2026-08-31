@@ -41,7 +41,7 @@ hl.monitor({
 hl.monitor({
     output   = "HDMI-A-1",
 --    mode     = "1280x1024@75.03",
-   mode     = "1920x1080@75",
+    mode     = "1920x1080@75",
     position = "1366x0",
     scale    = "0.5",
     mirror = "LVDS-1",
@@ -54,7 +54,8 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "thunar"
-local menu        = "hyprlauncher"
+--local menu        = "hyprlauncher"
+local menu        = "fuzzel"
 
 
 -------------------
@@ -68,13 +69,20 @@ local menu        = "hyprlauncher"
 
 hl.on("hyprland.start", function ()
 hl.exec_cmd("nm-applet")
+hl.exec_cmd("awww-daemon & sleep 0.2 && awww restore")
 hl.exec_cmd("wl-paste --type text --watch cliphist store")
+--hl.exec_cmd("/home/iusearchbtw/.config/waybar/change_wallpaper.sh")
+hl.exec_cmd(os.getenv("HOME") .. "/.config/waybar/change_wallpaper.sh")
+--hl.exec_cmd("sleep 0.5 && /home/iusearchbtw/.config/waybar/toggle_notes.sh")
+hl.exec_cmd("sleep 0.5 && " .. os.getenv("HOME") .. "/.config/waybar/toggle_notes.sh")
 hl.exec_cmd("wl-paste --type image --watch cliphist store")
 hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 hl.exec_cmd("easyeffects --gapplication-service")
-hl.exec_cmd("waybar & hyprpaper & swaync")
-hl.exec_cmd("nwg-dock-hyprland -r -p bottom")
-hl.exec_cmd("nautilus & until hyprctl clients | grep -q 'class: org.gnome.Nautilus'; do sleep 0.2; done; tauon & until hyprctl clients | grep -q 'class: tauonmb'; do sleep 0.2; done; kitty --class kitty-cava -e cava &")
+hl.exec_cmd("pactl set-default-sink easyeffects_sink")
+hl.exec_cmd("waybar & swaync")
+--hl.exec_cmd("hyprpaper")
+hl.exec_cmd("nwg-dock-hyprland -d -r -p bottom")
+hl.exec_cmd("nautilus '" .. os.getenv("HOME") .. "/Songs' & until hyprctl clients | grep -q 'class: org.gnome.Nautilus'; do sleep 0.2; done; tauon & until hyprctl clients | grep -q 'class: tauonmb'; do sleep 0.2; done; kitty --class kitty-cava -e cava &")
 end)
 
 -- Window rules for workspace10, set up for Music
@@ -99,6 +107,13 @@ hl.window_rule({
     workspace = "10 silent",
 })
 --More window_rule at the bottom
+---[[
+hl.window_rule({
+    match = {
+        class = "^(carbonyl-browser)$",
+    },
+    workspace = "9 silent",
+}) --]]
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -382,7 +397,7 @@ hl.gesture({
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
     name        = "compx-vxe-nordicmouse-1k-dongle-1",
-    sensitivity = -0.8,
+    sensitivity = -0.5,
 })
 
 
@@ -392,9 +407,13 @@ hl.device({
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local altMod = "ALT"
+local ctrlMod = "CTRL"
 
 hl.bind(altMod .. " + TAB", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + TAB", hl.dsp.focus({ workspace = "e-1" }))
+-- Toggle back and forth between the current and previously used workspace
+hl.bind(mainMod .. " + ESCAPE", hl.dsp.focus({ workspace = "previous" }))
+
 hl.bind(altMod .. " + F4", hl.dsp.exec_cmd("systemctl poweroff"))
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
@@ -405,17 +424,33 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png']]))
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd([[sh -c 'mkdir -p ~/Pictures && grim -g "$(slurp)" ~/Pictures/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png']]))
+hl.bind(ctrlMod .. " + Print", hl.dsp.exec_cmd([[sh -c 'grim -g "$(slurp)" - | wl-copy']]))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+--hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + Z", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("nwg-drawer"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kate"))
+--hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("nwg-drawer"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("nwg-drawer"))
+--hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kate"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("test -f /tmp/kate_lock || (touch /tmp/kate_lock && kate && sleep 0.5 && rm -f /tmp/kate_lock)"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
+-- Clipboard History Manager (requires cliphist & rofi/wofi/fuzzel)
+hl.bind(mainMod .. " + ALT + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu --width=80 --lines=12 --match-mode=fuzzy | cliphist decode | wl-copy"))
 --hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland -p bottom"))
 --hl.bind(mainMod .. " + ALT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland -p bottom"))
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.exec_cmd("nwg-dock-hyprland"))
-
+-- Color Picker (requires hyprpicker)
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
+--Tauon Music PLayer Controls
+hl.bind(ctrlMod .. " + SPACE", hl.dsp.exec_cmd("playerctl -p tauon play-pause"))
+hl.bind(ctrlMod .. " + LEFT", hl.dsp.exec_cmd("playerctl -p tauon previous"))
+hl.bind(ctrlMod .. " + RIGHT", hl.dsp.exec_cmd("playerctl -p tauon next"))
+hl.bind(ctrlMod .. " + UP", hl.dsp.exec_cmd("playerctl -p tauon volume 0.05+"))
+hl.bind(ctrlMod .. " + DOWN", hl.dsp.exec_cmd("playerctl -p tauon volume 0.05-"))
+--TO-DO list
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.config/waybar/toggle_notes.sh"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -436,8 +471,8 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
     -- Scroll through existing workspaces with mainMod + scroll
-    hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-    hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+    hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
+    hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e+1" }))
 
     -- Move/resize windows with mainMod + LMB/RMB and dragging
     hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
@@ -514,13 +549,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    match = { class = "org.kde.gwenview" },
-    float = true,
-    size = { 1000, 600 },
-    move = { "100%-670", "45" },
-    animation = "slide top",
-})
-hl.window_rule({
     match = { class = "org.gnome.gThumb" },
     float = true,
     size = { 1000, 600 },
@@ -528,4 +556,11 @@ hl.window_rule({
     animation = "slide top",
 })
 
+hl.window_rule({
+    name  = "floating-todo",
+    match = { class = "floating-todo" },
+    float = true,
+    center = true,
+    size  = { 800, 600 },
+})
 
